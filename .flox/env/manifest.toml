@@ -15,9 +15,31 @@ version = 1
 ##  $ flox show gum     <- show all versions of a package
 ## -------------------------------------------------------------------
 [install]
-# gum.pkg-path = "gum"
-# gum.version = "^0.14.5"
+# Shell
+zsh.pkg-path = "zsh"
+# TODO: Need to manage the config too
+starship.pkg-path = "starship"
+zsh-syntax-highlighting.pkg-path = "zsh-syntax-highlighting"
+zsh-autosuggestions.pkg-path = "zsh-autosuggestions"
 
+# Docker
+docker.pkg-path = "docker"
+docker-compose.pkg-path = "docker-compose"
+
+# Misc
+tree.pkg-path = "tree"
+shellcheck.pkg-path = "shellcheck"
+gnumake.pkg-path = "gnumake"
+pre-commit.pkg-path = "pre-commit"
+direnv.pkg-path = "direnv"
+jq.pkg-path = "jq"
+yq-go.pkg-path = "yq-go"
+openssl.pkg-path = "openssl"
+jujutsu.pkg-path = "jujutsu"
+asciinema.pkg-path = "asciinema"
+asciinema-agg.pkg-path = "asciinema-agg"
+ripgrep.pkg-path = "ripgrep"
+fzf.pkg-path = "fzf"
 
 ## Environment Variables ---------------------------------------------
 ##  ... available for use in the activated environment
@@ -45,12 +67,11 @@ version = 1
 ## ... sourced by _your shell_ when you run 'flox activate'.
 ## -------------------------------------------------------------------
 [profile]
-# common = '''
-#   gum style \
-#   --foreground 212 --border-foreground 212 --border double \
-#   --align center --width 50 --margin "1 2" --padding "2 4" \
-#     $INTRO_MESSAGE
-# '''
+common = '''
+eval "$(starship init zsh)"
+source $FLOX_ENV/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $FLOX_ENV/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+'''
 ## Shell specific profiles go here:
 # bash = ...
 # zsh  = ...
