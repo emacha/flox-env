@@ -44,14 +44,24 @@ gh.pkg-path = "gh"
 ##  ... run by _bash_ shell when you run 'flox activate'.
 ## -------------------------------------------------------------------
 [hook]
-# on-activate = '''
-#   # -> Set variables, create files and directories
-#   # -> Perform initialization steps, e.g. create a python venv
-#   # -> Useful environment variables:
-#   #      - FLOX_ENV_PROJECT=/home/user/example
-#   #      - FLOX_ENV=/home/user/example/.flox/run
-#   #      - FLOX_ENV_CACHE=/home/user/example/.flox/cache
-# '''
+on-activate = '''
+case "$(uname)" in
+  Darwin)
+    GHOSTTY_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+    VSCODE_DIR="$HOME/Library/Application Support/Code/User"
+    ;;
+  Linux)
+    GHOSTTY_DIR="$HOME/.config/ghostty"
+    VSCODE_DIR="$HOME/.config/Code/User"
+    ;;
+esac
+
+mkdir -p "$GHOSTTY_DIR"
+ln -sf "$FLOX_ENV_PROJECT/config-files/ghostty.ini" "$GHOSTTY_DIR/config"
+
+mkdir -p "$VSCODE_DIR"
+ln -sf "$FLOX_ENV_PROJECT/config-files/vscode-settings.json" "$VSCODE_DIR/settings.json"
+'''
 
 
 ## Profile script ----------------------------------------------------
@@ -106,11 +116,11 @@ gh.pkg-path = "gh"
 ## Other Environment Options -----------------------------------------
 [options]
 # Systems that environment is compatible with
-# systems = [
-#   "aarch64-darwin",
-#   "aarch64-linux",
-#   "x86_64-darwin",
-#   "x86_64-linux",
-# ]
+systems = [
+  "aarch64-darwin",
+  "aarch64-linux",
+  "x86_64-darwin",
+  "x86_64-linux",
+]
 # Uncomment to disable CUDA detection.
 # cuda-detection = false
