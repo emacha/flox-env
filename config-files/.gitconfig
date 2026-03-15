@@ -1,0 +1,7 @@
+[user]
+    email = eduardo.git@fastmail.com
+    name = Eduardo Silva
+[push]
+    default = current
+# [core]
+	# excludesfile = path to it

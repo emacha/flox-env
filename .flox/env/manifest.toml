@@ -56,6 +56,10 @@ case "$(uname)" in
     ;;
 esac
 
+export GIT_CONFIG_GLOBAL="$FLOX_ENV_PROJECT/config-files/.gitconfig"
+export JJ_CONFIG="$FLOX_ENV_PROJECT/config-files/jj.config.toml"
+export STARSHIP_CONFIG=$FLOX_ENV_PROJECT/config-files/starship.toml
+
 mkdir -p "$GHOSTTY_DIR"
 ln -sf "$FLOX_ENV_PROJECT/config-files/ghostty.ini" "$GHOSTTY_DIR/config"
 
