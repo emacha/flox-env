@@ -1,0 +1,4 @@
+*.sketch.*
+.claude
+.terraform
+.terraform.lock*

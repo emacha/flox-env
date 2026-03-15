@@ -2,11 +2,11 @@
 ##
 ##   _Everything_ you need to know about the _manifest_ is here:
 ##
-##               https://flox.dev/docs/concepts/manifest
+##   https://flox.dev/docs/reference/command-reference/manifest.toml/
 ##
 ## -------------------------------------------------------------------
 # Flox manifest version managed by Flox CLI
-version = 1
+schema-version = "1.10.0"
 
 
 ## Install Packages --------------------------------------------------
@@ -15,31 +15,22 @@ version = 1
 ##  $ flox show gum     <- show all versions of a package
 ## -------------------------------------------------------------------
 [install]
-# Shell
-zsh.pkg-path = "zsh"
-# TODO: Need to manage the config too
-starship.pkg-path = "starship"
-zsh-syntax-highlighting.pkg-path = "zsh-syntax-highlighting"
-zsh-autosuggestions.pkg-path = "zsh-autosuggestions"
-
-# Docker
-docker.pkg-path = "docker"
-docker-compose.pkg-path = "docker-compose"
-
-# Misc
-tree.pkg-path = "tree"
-shellcheck.pkg-path = "shellcheck"
-gnumake.pkg-path = "gnumake"
-pre-commit.pkg-path = "pre-commit"
-direnv.pkg-path = "direnv"
-jq.pkg-path = "jq"
-yq-go.pkg-path = "yq-go"
-openssl.pkg-path = "openssl"
 jujutsu.pkg-path = "jujutsu"
+jujutsu.pkg-group = "jujutsu"
+
+starship.pkg-path = "starship"
+marp-cli.pkg-path = "marp-cli"
 asciinema.pkg-path = "asciinema"
 asciinema-agg.pkg-path = "asciinema-agg"
 ripgrep.pkg-path = "ripgrep"
-fzf.pkg-path = "fzf"
+direnv.pkg-path = "direnv"
+gifsicle.pkg-path = "gifsicle"
+claude-code.pkg-path = "claude-code"
+go.pkg-path = "go"
+gopls.pkg-path = "gopls"
+pyright.pkg-path = "pyright"
+gh.pkg-path = "gh"
+
 
 ## Environment Variables ---------------------------------------------
 ##  ... available for use in the activated environment
@@ -67,34 +58,59 @@ fzf.pkg-path = "fzf"
 ## ... sourced by _your shell_ when you run 'flox activate'.
 ## -------------------------------------------------------------------
 [profile]
-common = '''
-eval "$(starship init zsh)"
-source $FLOX_ENV/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $FLOX_ENV/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-'''
-## Shell specific profiles go here:
+# common = '''
+#   gum style \
+#   --foreground 212 --border-foreground 212 --border double \
+#   --align center --width 50 --margin "1 2" --padding "2 4" \
+#     $INTRO_MESSAGE
+# '''
+## Shell-specific customizations such as setting aliases go here:
 # bash = ...
 # zsh  = ...
 # fish = ...
 
 
-## Services ----------------------------------------------------------
+## Services ---------------------------------------------------------
 ##  $ flox services start             <- Starts all services
 ##  $ flox services status            <- Status of running services
 ##  $ flox activate --start-services  <- Activates & starts all
-## -------------------------------------------------------------------
+## ------------------------------------------------------------------
 [services]
 # myservice.command = "python3 -m http.server"
+
+
+## Include ----------------------------------------------------------
+## ... environments to create a composed environment
+## ------------------------------------------------------------------
+[include]
+# environments = [
+#     { dir = "../common" }
+# ]
+
+
+## Build and publish your own packages ------------------------------
+##  $ flox build
+##  $ flox publish
+## ------------------------------------------------------------------
+[build]
+# [build.myproject]
+# description = "The coolest project ever"
+# version = "0.0.1"
+# command = """
+#   mkdir -p $out/bin
+#   cargo build --release
+#   cp target/release/myproject $out/bin/myproject
+# """
 
 
 ## Other Environment Options -----------------------------------------
 [options]
 # Systems that environment is compatible with
-systems = [
-  "aarch64-darwin",
-  "aarch64-linux",
-  "x86_64-darwin",
-  "x86_64-linux",
-]
+# systems = [
+#   "aarch64-darwin",
+#   "aarch64-linux",
+#   "x86_64-darwin",
+#   "x86_64-linux",
+# ]
 # Uncomment to disable CUDA detection.
 # cuda-detection = false

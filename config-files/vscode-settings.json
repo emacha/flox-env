@@ -1,0 +1,31 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 100,
+    "explorer.confirmDelete": false,
+    "makefile.configureOnOpen": true,
+    "terminal.integrated.suggest.enabled": true,
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.enablePersistentSessions": false,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "claudeCode.useTerminal": true,
+    "python.REPL.enableREPLSmartSend": false,
+    "python.terminal.shellIntegration.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "python.languageServer": "None",
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.sendKeybindingsToShell": true
+}

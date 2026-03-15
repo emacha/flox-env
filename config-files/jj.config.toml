@@ -1,0 +1,33 @@
+[credential]
+helper = "store"
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'recent()' = 'committer_date(after:"3 months ago")'
+
+[aliases]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+log-recent = ["log", "-r", "recent()"]
+l = ["log", "--limit", "7"]
+pull = ["git", "fetch"]
+push = ["git", "push"]
+nb = ["bookmark", "create", "-r @-"] # "new bookmark"
+clone = ["util", "exec", "--", "bash", "-c", """
+git clone "$1" && cd "$(basename "$1" .git)" && jj git init --colocate | grep 'jj bookmark track' | sh
+""", ""]
+
+[remotes.origin]
+auto-track-bookmarks = "*"
+
+[template-aliases]
+'format_short_change_id(id)' = 'id.shortest(4)'
+'format_short_signature(signature)' = 'signature.email().local()'
+'format_short_id(id)' = 'id.shortest(4)'
+
+[fix.tools.1-ruff_check]
+command = ["uv", "run", "--frozen", "ruff", "check", "--fix", "--unsafe-fixes", "--quiet", "--stdin-filename=$path"]
+patterns = ["glob:'**/*.py'"]
+
+[fix.tools.2-ruff_format]
+command = ["uv", "run", "--frozen", "ruff", "format", "-"]
+patterns = ["glob:'**/*.py'"]
